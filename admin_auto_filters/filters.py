@@ -8,7 +8,7 @@ from django.contrib.admin.widgets import (
     AutocompleteSelectMultiple as BaseAutocompleteSelectMultiple,
 )
 from django.core.exceptions import ImproperlyConfigured
-from django.db.models import ForeignObjectRel
+from django.db.models.fields.reverse_related import ForeignObjectRel
 from django.db.models.constants import LOOKUP_SEP  # this is '__'
 from django.db.models.fields.related_descriptors import (
     ReverseManyToOneDescriptor, ManyToManyDescriptor,
