@@ -101,6 +101,7 @@ class AutocompleteFilter(SimpleListFilter, metaclass=AutocompleteFilterMeta):
     is_placeholder_title = False
     label_by = None
     multi_select = False
+    search_button = False
     # parameter_name =  # Default set in metaclass; can override by setting in subclass body
     template = 'django-admin-autocomplete-filter/autocomplete-filter.html'  # overrides SimpleListFilter
     # title =  # Default set in metaclass; can override by setting in subclass body
@@ -245,6 +246,7 @@ class AutocompleteFilter(SimpleListFilter, metaclass=AutocompleteFilterMeta):
 
     def get_attrs(self, request, model_admin):
         """Gather the HTML tag attrs from all sources."""
+        self.widget_attrs.update({'data-field-name': self.field_name})
         attrs = self.widget_attrs.copy()
         attrs['id'] = 'id-%s-daaf-filter' % self.parameter_name
         if self.is_placeholder_title:

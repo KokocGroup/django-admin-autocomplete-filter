@@ -1,15 +1,28 @@
 django.jQuery(document).ready(function () {
-  django.jQuery('#changelist-filter select, #grp-filters select').on(
-    'change',
-    function (e, choice) {
-      var val = django.jQuery(e.target).val() || '';
-      var class_name = this.className;
-      var param = this.name;
-      if (class_name.includes('admin-autocomplete')) {
-        window.location.search = search_replace(param, val);
-      }
-    });
+  django.jQuery('#changelist-filter select, #grp-filters select').on('change', function (e) {
+    let select = django.jQuery(this);
+    let fieldName = select.data('field-name');
+
+    if (django.jQuery(`input#${fieldName}`).length > 0){
+      django.jQuery(`input#${fieldName}`).css('opacity', 1);
+      django.jQuery(`input#${fieldName}`).on('click', function() {
+        AjaxFilter(select);
+      });
+    } else {
+        AjaxFilter(select);
+    }
+  });
 });
+
+function AjaxFilter(select) {
+  var val = select.val() || '';
+  var class_name = select.attr('class');
+  var param = select.attr('name');
+
+    if (class_name.includes('admin-autocomplete')) {
+      window.location.search = search_replace(param, val);
+    }
+}
 
 function search_replace(name, value) {
   var new_search_hash = search_to_hash();

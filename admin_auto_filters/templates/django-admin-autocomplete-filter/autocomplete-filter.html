@@ -5,4 +5,7 @@
     <ul>
         <li>{{ spec.rendered_widget }}</li>
         <li>{{ spec.field }}</li>
+        {% if spec.search_button and spec.search_button %}
+            <input id="{{ spec.field_name }}" style="padding-top: 6px; height: 28px; opacity: 0.3;" type="submit" value="Найти">
+        {% endif %}
     </ul>
